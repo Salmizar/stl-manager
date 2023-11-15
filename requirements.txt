@@ -1,0 +1,14 @@
+Must haves
+- Configure a folder for which to list contents of.
+- Display a list of all folders as items in the specified folder.
+- Generate thumbnails of STL files.
+- Full management of folders (rename, delete, add/remove files from within).
+- Download files.
+- Run from a docker container.
+
+Nice to have
+- Search capabilities.
+- Sync with online account (thingiverse).
+- Package all files into a zip for download.
+- Ability to store additional data alongside files. print details etc.
+- shrable links
