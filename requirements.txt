@@ -8,7 +8,8 @@ Must haves
 
 Nice to have
 - Search capabilities.
-- Sync with online account (thingiverse).
+- infinate scroll
+- Sync with online account (thingiverse)
 - Package all files into a zip for download.
 - Ability to store additional data alongside files. print details etc.
 - shrable links
