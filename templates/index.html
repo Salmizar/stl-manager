@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Manager</title>
+    <link rel="stylesheet" href="static/style.css" />
+    <script src="static/htmx.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">STL Manager</div>
+        <aside>
+            <div class="start_search">Search</div>
+            <div class="add"><img title="Add Media" alt="Add Media" src="static/images/upload.svg" /></div>
+        </aside>
+    </header>
+    <section>
+        <input placeholder="Search" type="text" class="search" value="" />
+        <img title="Clear Search" alt="Clear Search" class="clear_search" src="static/images/delete.svg" />
+    </section>
+    <main hx-get="/list" hx-trigger="load">
+Main
+    </main>
+</body>
+</html>
