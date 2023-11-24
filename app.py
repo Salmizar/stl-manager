@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 
 load_dotenv()
-filesLocation = os.getenv('FILES_LOCATION', None)
+files_location = os.getenv('FILES_LOCATION', None)
 
 @app.route('/')
 def main():
@@ -15,8 +15,10 @@ def main():
 @app.route('/list')
 def list():
 	files = []
-	for folder_name in next(os.walk(filesLocation))[1]:
-		files.append({"name":folder_name})
+	incriment = 1
+	for folder_name in next(os.walk(files_location))[1]:
+		files.append({"id":incriment,"name":folder_name})
+		incriment = incriment + 1
 	return render_template("list.html", files=files)
 
 @app.route('/search')
@@ -27,16 +29,23 @@ def search():
 def empty():
 	return ''
 
-@app.route('/thumb/<thumbname>')
-def thumb(thumbname):
+@app.route('/delete/<folder_name>', methods=["DELETE"])
+def delete(folder_name):
+	folder_location = files_location + '\\' + folder_name
+	if os.path.exists(folder_location):
+		os.rmdir(folder_location)
+	return ''
+
+@app.route('/thumb/<thumb_name>')
+def thumb(thumb_name):
 	try:
-		thumb_dir = filesLocation + '\\'+ thumbname + '\\'
-		thumb_location =  thumb_dir + thumbname + '.png'
+		thumb_dir = files_location + '\\'+ thumb_name + '\\'
+		thumb_location =  thumb_dir + thumb_name + '.png'
 		if os.path.isfile(thumb_location):
 			return send_file( thumb_location)
 		else:
 			from convertSTL import convertSTLFile
-			stl_location = thumb_dir + thumbname + '.stl'
+			stl_location = thumb_dir + thumb_name + '.stl'
 			if os.path.isfile(stl_location):
 				convertSTLFile(stl_location, thumb_location)
 			else:

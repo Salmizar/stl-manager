@@ -1,11 +1,20 @@
 <div class="list_container">
     {% for file in files %}
-        <div class="card">
+        <div id="card{{file.id}}" class="card">
             <div class="thumb_container">
-                <img src="/thumb/{{file.name}}" class="thumb" />
+                <img class="thumb" src="/thumb/{{file.name}}" />
             </div>
-            <div class="file_name">{{file.name}}</div>
-            <button title="Delete" class="delete_bg"></button>
+            <div class="file_name">
+                {{file.name}}
+            </div>
+            <button 
+                class="delete_bg"
+                title="Delete"
+                hx-target="#card{{file.id}}"
+                hx-swap="outerHTML"
+                hx-delete="/delete/{{file.name}}"
+                hx-confirm="Are you sure?">
+            </button>
         </div>
     {% endfor %}
 </div>
