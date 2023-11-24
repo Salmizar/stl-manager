@@ -30,13 +30,21 @@ def empty():
 @app.route('/thumb/<thumbname>')
 def thumb(thumbname):
 	try:
-		thumbLocation =  filesLocation + '\\'+ thumbname + '\\' + thumbname + '.png'
-		if os.path.isfile(thumbLocation):
-			return send_file( thumbLocation)
+		thumb_dir = filesLocation + '\\'+ thumbname + '\\'
+		thumb_location =  thumb_dir + thumbname + '.png'
+		if os.path.isfile(thumb_location):
+			return send_file( thumb_location)
 		else:
 			from convertSTL import convertSTLFile
-			if os.path.isfile(thumbLocation):
-				return send_file( thumbLocation)
+			stl_location = thumb_dir + thumbname + '.stl'
+			if os.path.isfile(stl_location):
+				convertSTLFile(stl_location, thumb_location)
+			else:
+				#find first STL file to convert
+				convertSTLFile(thumb_dir + '\\' + os.listdir(thumb_dir)[0], thumb_location)
+
+			if os.path.isfile(thumb_location):
+				return send_file( thumb_location)
 			else:
 				return send_file( 'static/images/thumb.png')
 

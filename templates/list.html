@@ -1,7 +1,9 @@
 <div class="list_container">
     {% for file in files %}
         <div class="card">
-            <img src="/static/images/thumb.png" class="thumb" />
+            <div class="thumb_container">
+                <img src="/thumb/{{file.name}}" class="thumb" />
+            </div>
             <div class="file_name">{{file.name}}</div>
             <button title="Delete" class="delete_bg"></button>
         </div>

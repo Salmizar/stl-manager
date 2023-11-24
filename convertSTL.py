@@ -3,6 +3,7 @@ from stl import mesh
 from mpl_toolkits import mplot3d
 from matplotlib import pyplot
 import matplotlib
+import os
 def convertSTLFile(file_convert, file_name):
     try:
         matplotlib.use('AGG')
@@ -30,10 +31,15 @@ def crop(file_name):
         top = find_edge(img, 't')
         right = find_edge(img, 'r')
         bottom = find_edge(img, 'b')
-        img_res = img.crop((left, top, right, bottom))
-        img_res = resize(img_res, 225, 165)
-        img_res.save(file_name)
-        return True
+        if left != None and top != None and right != None and bottom != None:
+            img_res = img.crop((left, top, right, bottom))
+            img_res = resize(img_res, 225, 165)
+            img_res.save(file_name)
+            return True
+        else:
+            #blank thumbnail, clear it
+            os.remove(file_name)
+            return False
     except Exception as e:
         print(e)
         return False

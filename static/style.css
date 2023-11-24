@@ -94,12 +94,20 @@ main {
 .card:hover {
     border: 1px solid #AAA;
 }
-.thumb {
+.thumb_container {
     width: 225px;
-    background-color: #CCC;
+    background-color: #FFF;
     height: 165px;
     cursor: pointer;
     pointer-events: auto;
+    position: relative;
+}
+.thumb {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 10%;
+    left: 10%;
 }
 .file_name {
     height: 60px;
