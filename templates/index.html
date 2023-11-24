@@ -11,16 +11,13 @@
     <header>
         <div class="logo">STL Manager</div>
         <aside>
-            <div class="start_search">Search</div>
-            <div class="add"><img title="Add Media" alt="Add Media" src="static/images/upload.svg" /></div>
+            <button class="start_search" hx-get="/search" hx-target="#search">Search</button>
+            <button class="add" title="Add Media"></button>
         </aside>
     </header>
-    <section>
-        <input placeholder="Search" type="text" class="search" value="" />
-        <img title="Clear Search" alt="Clear Search" class="clear_search" src="static/images/delete.svg" />
+    <section id="search">
     </section>
     <main hx-get="/list" hx-trigger="load">
-Main
     </main>
 </body>
 </html>

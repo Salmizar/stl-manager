@@ -1,5 +1,9 @@
-<div>
+<div class="list_container">
     {% for file in files %}
-        <div>{{file.name}}</div>
+        <div class="card">
+            <img src="/static/images/thumb.png" class="thumb" />
+            <div class="file_name">{{file.name}}</div>
+            <button title="Delete" class="delete_bg"></button>
+        </div>
     {% endfor %}
 </div>

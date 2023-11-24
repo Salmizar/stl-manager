@@ -1,8 +1,15 @@
 # STL-Manager 
 An app to manager STL files. Built with Python, Flask and HTMX.
 
-# Create virtual environment: 
+# Environment Variable for files location
 
+.env
+```
+export FILES_LOCATION=""
+```
+
+# Create virtual environment: 
+Require packages: dotenv, numpy-stl, matplotlib
 ```
 PS stl-manager> pip install Flask
 PS stl-manager> pip install virtualenv

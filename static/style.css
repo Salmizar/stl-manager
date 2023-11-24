@@ -8,6 +8,15 @@ body {
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
+    overflow-x:hidden;
+}
+.delete_bg {
+    width: 32px;
+    height: 32px;
+    background: url(images/delete.svg) 0 0 no-repeat;
+    background-size: 32px 32px;
+    border:0px;
+    cursor: pointer;
 }
 header {
     width: 100%;
@@ -32,18 +41,21 @@ aside {
     padding: 6px;
     width: 100px;
     float:left;
+    text-align:left;
+    border:0px;
+    cursor: text;
 }
 .add {
-    float:right;
-}
-.add > img {
     width: 32px;
     height: 32px;
     cursor:pointer;
-    padding-left: 10px;
+    margin-left: 10px;
+    background: url(images/upload.svg) 0 0 no-repeat;
+    background-size: 32px 32px;
+    border:0px;
+    float:right;
 }
 section {
-    padding: 20px;
     text-align:center;
 }
 .search {
@@ -56,12 +68,50 @@ section {
     font-size: 18px;
 }
 .clear_search {
-    width: 32px;
-    height: 32px;
     position:relative;
     top: 10px;
-    cursor: pointer;
 }
 main {
     width: 100%;
+}
+.list_container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+.card {
+    margin-left: 25px;
+    margin-top: 25px;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    height: 265px;
+    position:relative;
+    pointer-events: none;
+}
+.card:hover {
+    border: 1px solid #AAA;
+}
+.thumb {
+    width: 225px;
+    background-color: #CCC;
+    height: 165px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.file_name {
+    height: 60px;
+    width: 205px;
+    padding: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.card .delete_bg {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    pointer-events: auto;
 }
