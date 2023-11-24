@@ -1,20 +1,17 @@
+from PIL import Image
+from stl import mesh
+from mpl_toolkits import mplot3d
+from matplotlib import pyplot
+import matplotlib
 def convertSTLFile(file_convert, file_name):
     try:
-        from stl import mesh
-        from mpl_toolkits import mplot3d
-        from matplotlib import pyplot
-        import matplotlib
         matplotlib.use('AGG')
         # Create a new plot
         figure = pyplot.figure(dpi=200)
         axes = figure.add_subplot(projection='3d')
-        
         your_mesh = mesh.Mesh.from_file(file_convert)
         axes.add_collection3d(mplot3d.art3d.Poly3DCollection(your_mesh.vectors))
-
-        # Auto scale to the mesh size
         scale = your_mesh.points.flatten()
-        
         axes.auto_scale_xyz(scale, scale, scale)
         pyplot.axis('off')
         pyplot.savefig(file_name, bbox_inches='tight', pad_inches = 0)
@@ -28,27 +25,31 @@ def convertSTLFile(file_convert, file_name):
     
 def crop(file_name):
     try:
-        from PIL import Image 
         img = Image.open(file_name)
         left = find_edge(img, 'l')
         top = find_edge(img, 't')
         right = find_edge(img, 'r')
         bottom = find_edge(img, 'b')
         img_res = img.crop((left, top, right, bottom))
-
-        '''base_width= 300
-        img = Image.open('somepic.jpg')
-        wpercent = (base_width / float(img.size[0]))
-        hsize = int((float(img.size[1]) * float(wpercent)))
-        img.resize((basewidth, hsize), Image.Resampling.LANCZOS)'''
-
+        img_res = resize(img_res, 225, 165)
         img_res.save(file_name)
         return True
-    
     except Exception as e:
         print(e)
         return False
-    
+
+def resize(img, w, h):
+    if img.width > w or img.height > h:
+        if w / img.width < h / img.height:
+            resize_percentage = (w / img.width)
+        else:
+            resize_percentage = (h / img.height)
+        width = img.width * resize_percentage 
+        height = img.height * resize_percentage
+        img_res = img.resize((int(width), int(height)), Image.Resampling.LANCZOS)
+        return img_res
+    else:
+        return img
 def find_edge(img, edge):
     white_pixel = (255, 255, 255, 255)
     if edge == "l":

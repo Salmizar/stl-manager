@@ -34,14 +34,10 @@ def thumb(thumbname):
 		if os.path.isfile(thumbLocation):
 			return send_file( thumbLocation)
 		else:
-			print('not found try to convert')
-			#convert the 
 			from convertSTL import convertSTLFile
-			print(convertSTLFile(filesLocation + '\\'+ thumbname + '\\' + thumbname + '.stl', thumbLocation))
 			if os.path.isfile(thumbLocation):
 				return send_file( thumbLocation)
 			else:
-				print('failed')
 				return send_file( 'static/images/thumb.png')
 
 	except Exception as e:
