@@ -1,5 +1,5 @@
 # STL-Manager 
-An app to manager STL files. Built with Python, Flask and HTMX.
+An app to manager STL files. Built with Python, Flask and HTMX, matplotlib
 
 # Environment Variable for files location
 
