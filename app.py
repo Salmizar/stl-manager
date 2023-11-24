@@ -1,6 +1,6 @@
 'linux: #!/user/bin/env python3'
 import os
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, request
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -20,6 +20,19 @@ def list():
 		files.append({"id":incriment,"name":folder_name})
 		incriment = incriment + 1
 	return render_template("list.html", files=files)
+
+
+@app.route('/list', methods=["POST"])
+def listsearch():
+	print(request.form['search'])
+	files = []
+	incriment = 1
+	for folder_name in next(os.walk(files_location))[1]:
+		if request.form['search'].lower() in folder_name.lower():
+			files.append({"id":incriment,"name":folder_name})
+			incriment = incriment + 1
+	return render_template("list.html", files=files)
+
 
 @app.route('/search')
 def search():

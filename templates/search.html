@@ -1,2 +1,19 @@
-<input placeholder="Search" type="text" class="search" value="" autofocus />
-<button title="Clear Search" hx-get="/empty" hx-target="#search" class="clear_search delete_bg"></button>
+<input
+    placeholder="Search"
+    type="text"
+    class="search"
+    value="" 
+    autofocus 
+    name="search"
+    hx-post="/list" 
+    hx-trigger="input changed delay:500ms, search" 
+    hx-target="#main" 
+    hx-indicator=".htmx-indicator"/>
+<div class="clear_search" hx-target="#main" hx-get="/list">
+    <button
+        title="Clear Search"
+        hx-get="/empty"
+        hx-target="#search"
+        class="delete_bg">
+    </button>
+</div>
