@@ -4,6 +4,8 @@ from mpl_toolkits import mplot3d
 from matplotlib import pyplot
 import matplotlib
 import os
+resize_width = 225
+resize_height = 165
 def convertSTLFile(file_convert, file_name):
     try:
         matplotlib.use('AGG')
@@ -33,7 +35,7 @@ def crop(file_name):
         bottom = find_edge(img, 'b')
         if left != None and top != None and right != None and bottom != None:
             img_res = img.crop((left, top, right, bottom))
-            img_res = resize(img_res, 225, 165)
+            img_res = resize(img_res, resize_width, resize_height)
             img_res.save(file_name)
             return True
         else:

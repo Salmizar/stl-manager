@@ -1,0 +1,58 @@
+<div id="main" class="view">
+    <div class="thumbs">
+        <div
+            class="thumb_container">
+            <img class="thumb" id="thumb" src="/thumb/{{folder_name}}" />
+        </div>
+        <div id="thumbnails" class="thumbnails">
+            {% for file in files %}
+                <div 
+                    class="thumbnail {% if file.id==1 %}selected{% endif %}"
+                    onclick="selectThumb(this, 'thumb', '/thumb/{{file.name}}/{{folder_name}}')"
+                    >
+                    <img class="mini_thumb" src="/thumb/{{file.name}}/{{folder_name}}" />
+                </div>
+            {% endfor %}
+        </div>
+        <div
+            id="scroll_left"
+            onclick="scrollObj('thumbnails','scroll_left', 'scroll_right', -167)"
+            title="Scroll left"
+            class="scroll_left scroll_disabled">
+            <
+        </div>
+        <div
+            id="scroll_right"
+            onclick="scrollObj('thumbnails', 'scroll_left', 'scroll_right',167)"
+            title="Scroll right"
+            class="scroll_right">
+            >
+        </div>
+    </div>
+    <div class="info">
+        <div class="file_name">
+            {{folder_name}}
+        </div>
+        <div
+            hx-target="#main"
+            hx-get="/edititem/{{folder_name}}">
+            <button 
+                class="edit_btn"
+                title="Edit"
+                hx-push-url="true"
+                hx-get="/edit/{{folder_name}}">
+            </button>
+        </div>
+        <div class="file_info">
+            {{folder_info}}
+        </div>
+        <div class="actions">
+            <a class="download_btn"
+                title="Download all files"
+                href="/download/{{folder_name}}"
+                download="{{folder_name}}.zip">
+                Download Files
+            </button>
+        </div>
+    </div>
+</div>

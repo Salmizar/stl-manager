@@ -30,10 +30,12 @@ header {
     text-shadow: 0 0 3px #000;
     padding: 20px 0 0 20px;
     float: left;
+    cursor: pointer;
 }
 aside {
     float: right;
-    padding: 20px 25px;
+    padding: 20px 55px;
+    position:relative;
 }
 .start_search {
     background-color: #EDEDED;
@@ -53,7 +55,8 @@ aside {
     background: url(images/upload.svg) 0 0 no-repeat;
     background-size: 32px 32px;
     border:0px;
-    float:right;
+    position:absolute;
+    right: 10px;
 }
 section {
     position:relative;
@@ -96,7 +99,7 @@ main {
 .card:hover {
     border: 1px solid #AAA;
 }
-.thumb_container {
+.card .thumb_container {
     width: 225px;
     background-color: #FFF;
     height: 165px;
@@ -104,14 +107,14 @@ main {
     pointer-events: auto;
     position: relative;
 }
-.thumb {
+.card .thumb_container .thumb {
     width: 80%;
     height: 80%;
     position: relative;
     top: 10%;
     left: 10%;
 }
-.file_name {
+.card .file_name {
     height: 60px;
     width: 205px;
     padding: 10px;
@@ -124,4 +127,130 @@ main {
     bottom: 5px;
     right: 5px;
     pointer-events: auto;
+}
+
+.view {
+    padding: 50px 90px 0 50px;
+    display: flex;
+}
+.view .thumbs {
+    min-width: 580px;
+    position:relative;
+}
+.thumbs .thumb_container {
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    height: 430px;
+}
+.thumbs .thumb_container .thumb {
+    width: 60%;
+    height: 60%;
+    position: relative;
+    top: 20%;
+    left: 18%;
+}
+.thumbs .thumbs_container {
+    border: 1px solid;
+}
+.thumbs .thumbnails {
+    width: 580px;
+    display: flex;
+    overflow: hidden;
+    margin-top: 10px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    position:relative;
+}
+.thumbnails::-webkit-scrollbar {
+    display: none;
+}
+.thumbnails .thumbnail {
+    min-width: 150px;
+    height: 115px;
+    border:1px solid #FFF;
+    margin-right: 15px;
+    cursor: pointer;
+    position:relative;
+}
+.thumbnails .thumbnail:hover {
+    border:1px solid #9D9D9D;
+}
+.thumbnail .mini_thumb {
+    width: 90%;
+    height:90%;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+}
+.thumbnails .selected {
+    cursor: default;
+    border:1px solid #9D9D9D;
+}
+.scroll_left:hover, .scroll_right:hover {
+    opacity: 0.6;
+}
+.scroll_left, .scroll_right {
+    position:absolute;
+    top: 435px;
+    background-color: #FFF;
+    border-radius: 3px;
+    font-size: 30px;
+    color: #696969;
+    cursor: pointer;
+    opacity: 0.5;
+    height: 125px;
+    width: 37px;
+    text-align: center;
+    line-height: 130px;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+}
+.scroll_disabled {
+    display:none;
+}
+.scroll_right {
+    right: 0px;
+}
+.view .info {
+    float: right;
+    padding-left: 80px;
+    width: 100%;
+    position:relative;
+}
+.info .file_name {
+    height: 60px;
+    font-size: 22px;
+    overflow: hidden;
+    font-weight: bold;
+    padding-right: 30px;
+}
+.info .file_info {
+    height: 360px;
+    white-space: pre-line;
+    font-size: 18px;
+}
+.actions {
+ text-align: center;
+}
+.actions .download_btn,.save_btn {
+    text-decoration-line: none;
+    color: #000;
+    padding: 7px 50px 7px 50px;
+    font-size: 20px;
+    background-color: #EFEFEF;
+    border: 1px solid #767676;
+    height: 35px;
+}
+.info .edit_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: url(images/edit.svg) 0 0 no-repeat;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-size: 26px 26px;
+    border:0px;
 }

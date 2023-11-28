@@ -1,18 +1,26 @@
 <div class="list_container">
-    {% for file in files %}
-        <div id="card{{file.id}}" class="card">
-            <div class="thumb_container">
-                <img class="thumb" src="/thumb/{{file.name}}" />
+    {% for folder in folders %}
+        <div id="card{{folder.id}}" class="card">
+            <div
+                class="thumb_container"
+                hx-get="/list/{{folder.name}}"
+                hx-push-url="true"
+                hx-target="body">
+                <img class="thumb" src="/thumb/{{folder.name}}" />
             </div>
-            <div class="file_name">
-                {{file.name}}
+            <div
+                class="file_name"
+                hx-get="/list/{{folder.name}}"
+                hx-push-url="true"
+                hx-target="body">
+                {{folder.name}}
             </div>
             <button 
                 class="delete_bg"
                 title="Delete"
-                hx-target="#card{{file.id}}"
+                hx-target="#card{{folder.id}}"
                 hx-swap="outerHTML"
-                hx-delete="/delete/{{file.name}}"
+                hx-delete="/delete/{{folder.name}}"
                 hx-confirm="Are you sure?">
             </button>
         </div>
