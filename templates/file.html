@@ -1,0 +1,12 @@
+<div class="file" id="file{{file_id}}">
+    <img class="mini_thumb" width="100" height="75" src="/thumb/{{folder_name}}/{{file_name}}" />
+    <div class="file_name">{{file_name}}</div>
+    <div class="file_size">{{file_size}}KB</div>
+    <button
+        title="Remove file"
+        class="delete_bg"
+        hx-target="#file{{file_id}}"
+        hx-swap="outerHTML"
+        hx-get="/empty">
+    </button>
+</div>

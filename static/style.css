@@ -10,6 +10,9 @@ body {
     flex-direction: column;
     overflow-x:hidden;
 }
+.hidden {
+    display:none;
+}
 .delete_bg {
     width: 32px;
     height: 32px;
@@ -129,11 +132,11 @@ main {
     pointer-events: auto;
 }
 
-.view {
+.view, .edit {
     padding: 50px 90px 0 50px;
     display: flex;
 }
-.view .thumbs {
+.view .thumbs, .edit .files {
     min-width: 580px;
     position:relative;
 }
@@ -213,35 +216,47 @@ main {
 .scroll_right {
     right: 0px;
 }
-.view .info {
+.view .info, .edit .info {
     float: right;
     padding-left: 80px;
     width: 100%;
     position:relative;
 }
 .info .file_name {
+    width: 100%;
     height: 60px;
     font-size: 22px;
     overflow: hidden;
     font-weight: bold;
     padding-right: 30px;
+    padding: 7px;
+    border: 1px solid #FFF;
 }
 .info .file_info {
-    height: 360px;
+    width: 100%;
     white-space: pre-line;
     font-size: 18px;
+    border: 1px solid #FFF;
+    margin-top: 20px;
+}
+.edit .file_info {
+    height: 320px;
+}
+.view .file_info {
+    min-height: 343px;
 }
 .actions {
- text-align: center;
+    padding-top: 20px;
+    text-align: center;
 }
-.actions .download_btn,.save_btn {
+.actions .download_btn, .actions .save_btn, .actions .add_files_btn {
     text-decoration-line: none;
     color: #000;
-    padding: 7px 50px 7px 50px;
+    padding: 5px 40px 5px 40px;
+    cursor: pointer;
     font-size: 20px;
     background-color: #EFEFEF;
     border: 1px solid #767676;
-    height: 35px;
 }
 .info .edit_btn {
     position: absolute;
@@ -253,4 +268,44 @@ main {
     cursor: pointer;
     background-size: 26px 26px;
     border:0px;
+}
+.edit .file_name, .edit .file_info {
+    padding: 7px;
+    border: 1px solid #CCC;
+    outline: 0px;
+    font-family: sans-serif;
+}
+
+.file {
+    margin-top: 10px;
+    display: flex;
+    border-bottom: 1px solid #CCC;
+    padding-bottom: 5px;
+    position:relative;
+}
+.file .mini_thumb {
+    width: 100px;
+    height: 76px;
+    
+}
+.file .file_name {
+    border:0px;
+    width: 100%;
+    height: 20px;
+    padding-left: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.file .file_size {
+    position: absolute;
+    font-size: 14px;
+    color: #909090;
+    left: 120px;
+    top: 45px;
+}
+.file .delete_bg {
+    position:relative;
+    right: 15px;
 }

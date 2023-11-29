@@ -1,49 +1,46 @@
-<div id="main" class="view">
-    <div class="thumbs">
-        <div
-            class="thumb_container">
-            <img class="thumb" id="thumb" src="/thumb/{{folder_name}}" />
-        </div>
-        <div id="thumbnails" class="thumbnails">
-            {% for file in files %}
-                <div 
-                    class="thumbnail {% if file.id==1 %}selected{% endif %}"
-                    onclick="selectThumb(this, 'thumb', '/thumb/{{file.name}}/{{folder_name}}')"
-                    >
-                    <img class="mini_thumb" src="/thumb/{{file.name}}/{{folder_name}}" />
-                </div>
-            {% endfor %}
-        </div>
-        <div
-            id="scroll_left"
-            onclick="scrollObj('thumbnails','scroll_left', 'scroll_right', -167)"
-            title="Scroll left"
-            class="scroll_left scroll_disabled">
-            <
-        </div>
-        <div
-            id="scroll_right"
-            onclick="scrollObj('thumbnails', 'scroll_left', 'scroll_right',167)"
-            title="Scroll right"
-            class="scroll_right">
-            >
+<div class="edit">
+    <div class="files">
+        {% for file in files %}
+            <div hx-trigger="load" hx-get="{{file.url}}"></div>
+        {% endfor %}
+        <div id="new_files"></div>
+        <div class="actions">
+            <button
+                class="add_files_btn"
+                title="Add files"
+                onclick="document.getElementById('file_upload').click()">
+                Add files
+            </button>
         </div>
     </div>
     <div class="info">
-        <div class="file_name">
-            Edit:{{folder_name}}
-        </div>
-        <div class="file_info">
-            {{folder_info}}
-        </div>
-        <div class="actions">
-            <button 
-                class="save_btn"
-                title="Save changes"
-                hx-target="body"
-                hx-delete="/nowhere/{{folder_name}}">
-                Save Changes
-            </button>
-        </div>
+        <form
+            hx-encoding='multipart/form-data'
+            hx-post='/upload/{{folder_name}}'>
+            <input name="file_upload" onchange="addFiles(event, '{{folder_name}}')" class="file_upload" id="file_upload" type='file' multiple accept=".stl,.png,.jpg,.svg">
+            <input
+                placeholder="Title"
+                type="text"
+                class="file_name"
+                value="{{folder_name}}" 
+                autofocus 
+                name="title"/>
+            <textarea 
+            rows="10"
+            cols="150"
+            placeholder="Description"
+            class="file_info"
+            name="info">{{folder_info}}</textarea>
+            <input id="newfiles2add" class="hidden" name="newfiles2add" value="" />
+            <input id="files2remove" class="hidden" name="files2remove" value="{{file_names}}" />
+            <div class="actions">
+                <button 
+                    onclick="prepareUpload()"
+                    class="save_btn"
+                    title="Save changes">
+                    Save
+                </button>
+            </div>
+    </form>
     </div>
 </div>

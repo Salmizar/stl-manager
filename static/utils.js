@@ -1,4 +1,5 @@
 var scrollInterval;
+var files2upload = [];
 function scrollObj(obj, leftScroll, rightScroll, distance) {
     let obj2Scroll = document.getElementById(obj);
     clearInterval(scrollInterval);
@@ -34,4 +35,35 @@ function selectThumb(thumb, objId, src) {
         }
     )
     thumb.classList.add('selected');
+}
+
+function addFiles(e, folder_name) {
+    document.getElementById('new_files').innerHTML = '';
+    files2upload = [];
+    Object.keys(e.currentTarget.files).forEach(key=>{
+        let file = e.currentTarget.files[key];
+        let id = Math.round(Math.random()*1000);
+        files2upload.push({"id":'new'+id, "name":file.name});
+        let url = "/file?file_id=new"+id+"&file_name="+file.name+"&file_size="+Math.round(file.size/1024)+"&folder_name="+folder_name;
+        setTimeout(() => {
+            htmx.ajax('GET', url, {target:'#new_files', swap:'beforeend'});
+        }, key*20);
+    })
+}
+function prepareUpload() {
+    let files = '';
+    files2upload.forEach((file) => {
+        if (document.getElementById("file"+file.id)) {
+            files += ((files==='')?'':',') + file.name
+        }
+    });
+    document.getElementById('newfiles2add').value = files;
+    files = '';
+    filesArray = document.getElementById('files2remove').value.split(',');
+    for (let x = 0; x < filesArray.length; x++) {
+        if (document.getElementById('file'+(x+1)) === null) {
+            files += ((files==='')?'':',') + filesArray[x]
+        }
+    }
+    document.getElementById('files2remove').value = files;
 }

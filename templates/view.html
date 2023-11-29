@@ -1,4 +1,4 @@
-<div id="main" class="view">
+<div class="view">
     <div class="thumbs">
         <div
             class="thumb_container">
@@ -8,9 +8,9 @@
             {% for file in files %}
                 <div 
                     class="thumbnail {% if file.id==1 %}selected{% endif %}"
-                    onclick="selectThumb(this, 'thumb', '/thumb/{{file.name}}/{{folder_name}}')"
+                    onclick="selectThumb(this, 'thumb', '/thumb/{{folder_name}}/{{file.name}}')"
                     >
-                    <img class="mini_thumb" src="/thumb/{{file.name}}/{{folder_name}}" />
+                    <img class="mini_thumb" src="/thumb/{{folder_name}}/{{file.name}}" />
                 </div>
             {% endfor %}
         </div>
