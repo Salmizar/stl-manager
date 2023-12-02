@@ -17,7 +17,7 @@
         <form
             hx-encoding='multipart/form-data'
             hx-post='/upload/{{folder_name}}'>
-            <input name="file_upload" onchange="addFiles(event, '{{folder_name}}')" class="file_upload" id="file_upload" type='file' multiple accept=".stl,.png,.jpg,.svg">
+            <input name="file_upload" onchange="addFiles(event, '{{folder_name}}')" class="file_upload hidden" id="file_upload" type='file' multiple accept=".stl,.png,.jpg,.svg">
             <input
                 placeholder="Title"
                 type="text"

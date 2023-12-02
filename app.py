@@ -25,20 +25,22 @@ def main(folder_name=None):
 def list():
 	folders = []
 	incriment = 1
-	for folder_name in next(os.walk(files_location))[1]:
-		if folder_name not in omit_folders:
-			folders.append({"id":incriment,"name":folder_name})
-			incriment = incriment + 1
+	if os.path.exists(files_location):
+		for folder_name in next(os.walk(files_location))[1]:
+			if folder_name not in omit_folders:
+				folders.append({"id":incriment,"name":folder_name})
+				incriment = incriment + 1
 	return render_template("list.html", folders=folders)
 
 @app.route('/listitems', methods=["POST"])
 def listsearch():
 	folders = []
 	incriment = 1
-	for folder_name in next(os.walk(files_location))[1]:
-		if request.form['search'].lower() in folder_name.lower() and folder_name not in omit_folders:
-			folders.append({"id":incriment,"name":folder_name})
-			incriment = incriment + 1
+	if os.path.exists(files_location):
+		for folder_name in next(os.walk(files_location))[1]:
+			if request.form['search'].lower() in folder_name.lower() and folder_name not in omit_folders:
+				folders.append({"id":incriment,"name":folder_name})
+				incriment = incriment + 1
 	return render_template("list.html", folders=folders)
 
 @app.route('/search')
@@ -68,7 +70,7 @@ def thumb(folder_name, thumb_name=None):
 		thumb_location = ''
 		if thumb_name != None:
 			thumb_location =  thumb_dir + thumb_name + '.png'		
-		else:
+		elif os.path.exists(thumb_dir):
 			for file_name in next(os.walk(thumb_dir))[2]:
 				if pathlib.Path(file_name).suffix in file_formats:
 					thumb_location =  thumb_dir + file_name
@@ -112,37 +114,42 @@ def download(folder_name):
 def view(folder_name):
 	files = []
 	incriment = 1
-	data_folder = files_location + '\\' + folder_name + '\\data\\'
-	for file_name in next(os.walk(data_folder))[2]:
-		suffix = pathlib.Path(file_name).suffix
-		if suffix in file_formats:
-			files.append({"id":incriment,"name":pathlib.Path(file_name).stem})
-			incriment = incriment + 1
 	folder_info = ''
-	if (os.path.isfile(data_folder+"\\data\\info.txt")):
-		with open(data_folder+"\\data\\info.txt") as f:
-			folder_info = f.readlines()
-	return render_template("view.html", files=files, folder_info=''.join(folder_info), folder_name=folder_name)
+	data_folder = files_location + '\\' + folder_name + '\\data\\'
+	if os.path.exists(data_folder):
+		for file_name in next(os.walk(data_folder))[2]:
+			suffix = pathlib.Path(file_name).suffix
+			if suffix in file_formats:
+				files.append({"id":incriment,"name":pathlib.Path(file_name).stem})
+				incriment = incriment + 1
+		if (os.path.isfile(data_folder+"\\data\\info.txt")):
+			with open(data_folder+"\\data\\info.txt") as f:
+				folder_info = f.readlines()
+		return render_template("view.html", files=files, folder_info=''.join(folder_info), folder_name=folder_name)
+	else:
+		return render_template("notfound.html", folder_name=folder_name)
 
 @app.route('/edititem/<folder_name>')
 def edit(folder_name):
 	files = []
 	file_names = ''
+	folder_info = ''
 	incriment = 0
 	data_folder = files_location + '\\' + folder_name + '\\'
-	for file_name in next(os.walk(data_folder))[2]:
-		suffix = pathlib.Path(file_name).suffix
-		file_location = data_folder + '\\' + file_name
-		if suffix not in omit_files:
-			incriment = incriment + 1
-			files.append({"url":"/file?file_id="+str(incriment)+"&file_name="+pathlib.Path(file_name).stem+"&file_size="+str(round(os.path.getsize(file_location)/1024))+"&folder_name="+folder_name})
-			file_names += ','+file_name if file_names!='' else file_name
-	
-	folder_info = ''
-	if (os.path.isfile(data_folder+"\\data\\info.txt")):
-		with open(data_folder+"\\data\\info.txt") as f:
-			folder_info = f.readlines()
-	return render_template("edit.html", files=files, folder_info=''.join(folder_info), folder_name=folder_name, file_names=file_names)
+	if os.path.exists(data_folder):
+		for file_name in next(os.walk(data_folder))[2]:
+			suffix = pathlib.Path(file_name).suffix
+			file_location = data_folder + '\\' + file_name
+			if suffix not in omit_files:
+				incriment = incriment + 1
+				files.append({"url":"/file?file_id="+str(incriment)+"&file_name="+pathlib.Path(file_name).stem+"&file_size="+str(round(os.path.getsize(file_location)/1024))+"&folder_name="+folder_name})
+				file_names += ','+file_name if file_names!='' else file_name
+		if (os.path.isfile(data_folder+"\\data\\info.txt")):
+			with open(data_folder+"\\data\\info.txt") as f:
+				folder_info = f.readlines()
+		return render_template("edit.html", files=files, folder_info=''.join(folder_info), folder_name=folder_name, file_names=file_names)
+	else:
+		return ''
 
 @app.route('/upload/<folder_name>', methods=['POST'])
 def upload(folder_name):

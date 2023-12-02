@@ -13,6 +13,10 @@ body {
 .hidden {
     display:none;
 }
+.not_found {
+    padding-top:200px;
+    text-align:center;
+}
 .delete_bg {
     width: 32px;
     height: 32px;
