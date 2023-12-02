@@ -20,22 +20,26 @@
             <input name="file_upload" onchange="addFiles(event, '{{folder_name}}')" class="file_upload hidden" id="file_upload" type='file' multiple accept=".stl,.png,.jpg,.svg">
             <input
                 placeholder="Title"
+                minlength="5"
+                maxlength="128"
                 type="text"
                 class="file_name"
                 value="{{folder_name}}" 
-                autofocus 
+                autofocus
+                required
                 name="title"/>
             <textarea 
             rows="10"
             cols="150"
             placeholder="Description"
+            maxlength="1000"
             class="file_info"
             name="info">{{folder_info}}</textarea>
             <input id="newfiles2add" class="hidden" name="newfiles2add" value="" />
             <input id="files2remove" class="hidden" name="files2remove" value="{{file_names}}" />
             <div class="actions">
                 <button 
-                    onclick="prepareUpload()"
+                    onclick="return prepareUpload()"
                     class="save_btn"
                     title="Save changes">
                     Save

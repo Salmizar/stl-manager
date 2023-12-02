@@ -172,6 +172,6 @@ def upload(folder_name):
 	for file in request.files.getlist('file_upload'):
 		if file.filename in request.form["newfiles2add"]:
 			file.save(folder_location + '\\' + file.filename)
-	return ''
+	return '<div hx-get="/list/'+folder_name+'" hx-trigger="load" hx-push-url="true" hx-target="body"></div>'
 
 app.run()

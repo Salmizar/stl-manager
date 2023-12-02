@@ -43,7 +43,7 @@ function addFiles(e, folder_name) {
     Object.keys(e.currentTarget.files).forEach(key=>{
         let file = e.currentTarget.files[key];
         let id = Math.round(Math.random()*1000);
-        files2upload.push({"id":'new'+id, "name":file.name});
+        files2upload.push({"id":'new'+id, "name":file.name, "extension":file.name.substring(file.name.lastIndexOf('.')+1)});
         let url = "/file?file_id=new"+id+"&file_name="+file.name+"&file_size="+Math.round(file.size/1024)+"&folder_name="+folder_name;
         setTimeout(() => {
             htmx.ajax('GET', url, {target:'#new_files', swap:'beforeend'});
@@ -51,8 +51,12 @@ function addFiles(e, folder_name) {
     })
 }
 function prepareUpload() {
+    let numberOfSTLFiles = 0;
     let files = '';
     files2upload.forEach((file) => {
+        if (file.extension === "stl") {
+            numberOfSTLFiles++;
+        }
         if (document.getElementById("file"+file.id)) {
             files += ((files==='')?'':',') + file.name
         }
@@ -63,7 +67,14 @@ function prepareUpload() {
     for (let x = 0; x < filesArray.length; x++) {
         if (document.getElementById('file'+(x+1)) === null) {
             files += ((files==='')?'':',') + filesArray[x]
+        } else if (filesArray[x].substring(filesArray[x].lastIndexOf('.')+1) === "stl") {
+            numberOfSTLFiles++;
         }
     }
     document.getElementById('files2remove').value = files;
+    if (numberOfSTLFiles > 0 ) {
+        return true;
+    }
+    alert('You must have at least one STL file')
+    return false;
 }
