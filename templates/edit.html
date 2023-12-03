@@ -9,14 +9,24 @@
                 class="add_files_btn"
                 title="Add files"
                 onclick="document.getElementById('file_upload').click()">
-                Add files
+                {% if folder_name != '' %}
+                    Add files
+                {% else %}
+                    Select files
+                {% endif %}
             </button>
         </div>
     </div>
     <div class="info">
+        {% if folder_name != '' %}
         <form
             hx-encoding='multipart/form-data'
             hx-post='/upload/{{folder_name}}'>
+        {% else %}
+        <form
+            hx-encoding='multipart/form-data'
+            hx-post='/upload'>
+        {% endif %}
             <input name="file_upload" onchange="addFiles(event, '{{folder_name}}')" class="file_upload hidden" id="file_upload" type='file' multiple accept=".stl,.png,.jpg,.svg">
             <input
                 placeholder="Title"
@@ -35,11 +45,11 @@
             maxlength="1000"
             class="file_info"
             name="info">{{folder_info}}</textarea>
-            <input id="newfiles2add" class="hidden" name="newfiles2add" value="" />
-            <input id="files2remove" class="hidden" name="files2remove" value="{{file_names}}" />
+            <input id="newfiles2add" type="hidden" name="newfiles2add" value="" />
+            <input id="files2remove" type="hidden" name="files2remove" value="{{file_names}}" />
             <div class="actions">
                 <button 
-                    onclick="return prepareUpload()"
+                    onclick="return prepareUpload(event)"
                     class="save_btn"
                     title="Save changes">
                     Save

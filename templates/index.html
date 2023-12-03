@@ -30,7 +30,11 @@
                     <button class="start_search" hx-get="/search" hx-target="#search">Search</button>
                 </div>
             </div>
-            <button class="add" title="Add Media"></button>
+            <div
+                hx-get="/additem" 
+                hx-target="#main">
+                    <button class="add" hx-get="/add" hx-push-url="true" title="Add Media"></button>
+            </div>
         </aside>
     </header>
     <section id="search">
@@ -41,6 +45,8 @@
         {% else %}
             <main hx-get="/view/{{folder_name}}" id="main" hx-trigger="load">
         {% endif %}
+    {% elif adding %}
+        <main hx-get="/additem" id="main" hx-trigger="load">
     {% else %}
         <main hx-get="/listitems" id="main" hx-trigger="load">
     {% endif %}

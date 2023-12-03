@@ -260,6 +260,10 @@ main {
     background-color: #EFEFEF;
     border: 1px solid #767676;
 }
+.actions .save_btn_disabled {
+    opacity: 0.6;
+    cursor:default;
+}
 .info .edit_btn {
     position: absolute;
     top: 5px;

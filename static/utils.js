@@ -36,7 +36,6 @@ function selectThumb(thumb, objId, src) {
     )
     thumb.classList.add('selected');
 }
-
 function addFiles(e, folder_name) {
     document.getElementById('new_files').innerHTML = '';
     files2upload = [];
@@ -50,7 +49,8 @@ function addFiles(e, folder_name) {
         }, key*20);
     })
 }
-function prepareUpload() {
+function prepareUpload(event) {
+    event.target.classList.add('save_btn_disabled');
     let numberOfSTLFiles = 0;
     let files = '';
     files2upload.forEach((file) => {
