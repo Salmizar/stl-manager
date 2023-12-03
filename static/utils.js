@@ -41,6 +41,9 @@ function addFiles(e, folder_name) {
     files2upload = [];
     Object.keys(e.currentTarget.files).forEach(key=>{
         let file = e.currentTarget.files[key];
+        if (document.getElementById('title').value === '') {
+            document.getElementById('title').value = file.name.substring(0,file.name.lastIndexOf('.'));
+        }
         let id = Math.round(Math.random()*1000);
         files2upload.push({"id":'new'+id, "name":file.name, "extension":file.name.substring(file.name.lastIndexOf('.')+1)});
         let url = "/file?file_id=new"+id+"&file_name="+file.name+"&file_size="+Math.round(file.size/1024)+"&folder_name="+folder_name;
