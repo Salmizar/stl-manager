@@ -25,6 +25,14 @@ body {
     border:0px;
     cursor: pointer;
 }
+.process_bg {
+    width: 32px;
+    height: 32px;
+    background: url(images/process.svg) 0 0 no-repeat;
+    background-size: 28px 28px;
+    border:0px;
+    cursor: pointer;
+}
 header {
     width: 100%;
     height: 70px;
@@ -121,8 +129,8 @@ main {
 }
 .card .file_name {
     height: 60px;
-    width: 205px;
     padding: 10px;
+    padding-top: 0px;
     overflow: hidden;
     cursor: pointer;
     pointer-events: auto;
@@ -133,7 +141,12 @@ main {
     right: 5px;
     pointer-events: auto;
 }
-
+.card .process_bg {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    pointer-events: auto;
+}
 .view, .edit {
     padding: 50px 90px 0 50px;
     display: flex;

@@ -2,11 +2,16 @@
     {% for folder in folders %}
         <div id="card{{folder.id}}" class="card">
             <div
+                id="thumb{{folder.id}}"
                 class="thumb_container"
                 hx-get="/list/{{folder.name}}"
                 hx-push-url="true"
                 hx-target="body">
-                <img class="thumb" src="/thumb/{{folder.name}}" />
+                {% if folder.process %}
+                    <img class="thumb" src="/static/images/thumb.png" />
+                {% else %}
+                    <img class="thumb" src="/thumb/{{folder.name}}" />
+                {% endif %}
             </div>
             <div
                 class="file_name"
@@ -15,6 +20,15 @@
                 hx-target="body">
                 {{folder.name}}
             </div>
+            {% if folder.process %}
+                <button 
+                    class="process_bg"
+                    title="process"
+                    hx-target="#thumb{{folder.id}}"
+                    hx-swap="innerHTML"
+                    hx-get="/process/{{folder.name}}"
+                </button>
+            {% endif %}
             <button 
                 class="delete_bg"
                 title="Delete"

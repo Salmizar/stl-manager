@@ -53,7 +53,6 @@ function addFiles(e, folder_name) {
     })
 }
 function prepareUpload(event) {
-    event.target.classList.add('save_btn_disabled');
     let numberOfSTLFiles = 0;
     let files = '';
     files2upload.forEach((file) => {
@@ -68,7 +67,7 @@ function prepareUpload(event) {
     files = '';
     filesArray = document.getElementById('files2remove').value.split(',');
     for (let x = 0; x < filesArray.length; x++) {
-        if (document.getElementById('file'+(x+1)) === null) {
+        if (document.getElementById('file'+(x)) === null) {
             files += ((files==='')?'':',') + filesArray[x]
         } else if (filesArray[x].substring(filesArray[x].lastIndexOf('.')+1) === "stl") {
             numberOfSTLFiles++;
@@ -76,6 +75,7 @@ function prepareUpload(event) {
     }
     document.getElementById('files2remove').value = files;
     if (numberOfSTLFiles > 0 ) {
+        event.target.classList.add('save_btn_disabled');
         return true;
     }
     alert('You must have at least one STL file')

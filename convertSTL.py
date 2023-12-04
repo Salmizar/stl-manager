@@ -6,7 +6,7 @@ import matplotlib
 import os
 resize_width = 225
 resize_height = 165
-def convertSTLFile(file_convert, file_name):
+def ConvertSTL(file_convert, file_name):
     try:
         matplotlib.use('AGG')
         # Create a new plot
