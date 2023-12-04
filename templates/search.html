@@ -10,11 +10,12 @@
     hx-target="#main" 
     hx-indicator=".htmx-indicator"/>
 <div hx-get="/empty" hx-target="#search">
-    <div class="clear_search" hx-target="#main" hx-get="/listitems">
+    <div class="clear_search">
         <button
             title="Clear Search"
             hx-get="/"
             hx-push-url="true"
+            hx-target="body"
             class="delete_bg">
         </button>
     </div>
