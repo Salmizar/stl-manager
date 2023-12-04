@@ -114,9 +114,9 @@ def view(folder_name):
 		for file_name in next(os.walk(folder_location))[2]:
 			if pathlib.Path(file_name).suffix not in omit_files:
 				if pathlib.Path(file_name).suffix in thumb_file_formats:
-					files.insert(0, {"id":incriment,"name":pathlib.Path(file_name).stem})
+					files.insert(0, {"id":incriment, "name":pathlib.Path(file_name).stem, "fullname":pathlib.Path(file_name).name})
 				else:
-					files.append({"id":incriment,"name":pathlib.Path(file_name).stem})
+					files.append({"id":incriment, "name":pathlib.Path(file_name).stem, "fullname":pathlib.Path(file_name).name})
 				incriment = incriment + 1		
 		if (os.path.isfile(folder_location+"info.txt")):
 			with open(folder_location+"info.txt") as f:

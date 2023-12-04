@@ -6,11 +6,13 @@
         </div>
         <div id="thumbnails" class="thumbnails">
             {% for file in files %}
-                <div 
+                <div
+                    title="{{file.fullname}}"
                     class="thumbnail {% if file.id==1 %}selected{% endif %}"
                     onclick="selectThumb(this, 'thumb', '/thumb/{{folder_name}}/{{file.name}}')"
                     >
                     <img class="mini_thumb" src="/thumb/{{folder_name}}/{{file.name}}" />
+                    <div class="mini_thumb_name">{{file.fullname}}</div>
                 </div>
             {% endfor %}
         </div>
