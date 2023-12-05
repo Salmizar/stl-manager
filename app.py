@@ -184,4 +184,7 @@ def upload(folder_name=None):
 	GenerateThumbnails(folder_location, new_folder_name);
 	return '<div hx-get="/list/'+new_folder_name+'" hx-trigger="load" hx-push-url="true" hx-target="body"></div>'
 
-app.run()
+
+
+if __name__ == "__main__":
+	app.run(debug=True)

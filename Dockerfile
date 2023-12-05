@@ -1,13 +1,14 @@
-# RUN FIRST
-# npm run build
+FROM ubuntu
 
-FROM node:18-alpine
+RUN apt update
+RUN apt install python3-pip -y
+RUN pip3 install flask
+RUN pip3 install python-dotenv
+RUN pip3 install numpy-stl
+RUN pip3 install matplotlib
 
-COPY ["dist", "."]
+WORKDIR /app
 
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
+COPY . .
 
-EXPOSE 3000
-
-ENTRYPOINT ["node", "index.html"]
+CMD [ "python3" , "-m", "flask", "run", "--host=0.0.0.0"]
