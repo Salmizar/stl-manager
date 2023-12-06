@@ -9,6 +9,7 @@ from generateThumbnails import GenerateThumbnails
 app = Flask(__name__)
 load_dotenv()
 files_location = os.getenv('FILES_LOCATION', None).replace('\\', os.sep)
+#print(files_location, sum([len(dirs) for r, dirs, files in os.walk(files_location)]))
 thumb_file_formats = ['.png', '.jpg', '.gif', '.svg']
 thumb_size = {"width":225, "height":115}
 omit_folders = ['data', 'temp']
@@ -183,8 +184,6 @@ def upload(folder_name=None):
 	#Generate a default thumbnails
 	GenerateThumbnails(folder_location, new_folder_name);
 	return '<div hx-get="/list/'+new_folder_name+'" hx-trigger="load" hx-push-url="true" hx-target="body"></div>'
-
-
 
 if __name__ == "__main__":
 	app.run(debug=True)
