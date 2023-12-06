@@ -24,7 +24,7 @@ docker run -v stlfiles:/nas -d -p 5000:5000 -e "FILES_LOCATION=/stlfiles" stl-ma
 ```
 Run Image in container: Create attached volume and change env variable
 ```
-docker run -v "C:\Users\Chris\Desktop\Projects\My Projects\backup:/stlfiles" -d -p 5000:5000 -e "FILES_LOCATION=/stlfiles" stl-manager
+docker run -v "C:\Users\user\documents\stlfiles:/stlfiles" -d -p 5000:5000 -e "FILES_LOCATION=/stlfiles" stl-manager
 ```
 
 # Create virtual environment: 
