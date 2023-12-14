@@ -10,7 +10,8 @@ export PORT=5000
 ```
 # Docker public image available
 ```
-https://hub.docker.com/r/salmizar/stl-manager
+[Docker Image](https://hub.docker.com/r/salmizar/stl-manager)
+Configure volume to stl files location as /stlfiles
 ```
 # Docker command helpers
 
