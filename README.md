@@ -8,7 +8,10 @@ An app to manager STL files. Built with Python, Flask and HTMX, matplotlib. Run 
 export FILES_LOCATION=""
 export PORT=5000
 ```
-
+# Docker public image available
+```
+https://hub.docker.com/r/salmizar/stl-manager
+```
 # Docker command helpers
 
 Build docker image: In App root folder
