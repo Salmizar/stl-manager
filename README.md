@@ -6,13 +6,18 @@ An app to manager STL files. Built with Python, Flask and HTMX, matplotlib. Run 
 .env
 ```
 export FILES_LOCATION=""
+export PORT=5000
 ```
 
 # Docker command helpers
 
 Build docker image: In App root folder
 ```
-docker build -t stl-manager .
+docker build -t RepoName/stl-manager .
+```
+Push to Docker hub (must have an existing repo in your hub to push to)
+```
+docker push RepoName/stl-manager
 ```
 Create password protected network volume
 ```
@@ -25,6 +30,12 @@ docker run -v stlfiles:/nas -d -p 5000:5000 -e "FILES_LOCATION=/stlfiles" stl-ma
 Run Image in container: Create attached volume and change env variable
 ```
 docker run -v "C:\Users\user\documents\stlfiles:/stlfiles" -d -p 5000:5000 -e "FILES_LOCATION=/stlfiles" stl-manager
+```
+
+# Run Locally
+
+```
+python app.py
 ```
 
 # Create virtual environment: 
@@ -43,8 +54,8 @@ PS stl-manager> venv\Scripts\activate
 # Build/Run Docker Image
 
 ```
-docker build -t stl-manager .
-docker run -d -p 5000:5000 stl-manager
+docker build -t RepoName/stl-manager .
+docker run -d -p RepoName/5000:5000 stl-manager
 ```
 
 # Fix no module named 'pip' even after successful installation

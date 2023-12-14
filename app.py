@@ -186,4 +186,4 @@ def upload(folder_name=None):
 	return '<div hx-get="/list/'+new_folder_name+'" hx-trigger="load" hx-push-url="true" hx-target="body"></div>'
 
 if __name__ == "__main__":
-	app.run(debug=True)
+	app.run(debug=True, port=os.getenv('PORT', None))
