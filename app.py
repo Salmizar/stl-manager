@@ -20,10 +20,17 @@ def empty():
 
 @app.route('/')
 @app.route('/add')
+@app.route('/search')
 @app.route('/list/<folder_name>')
 @app.route('/edit/<folder_name>')
 def main(folder_name=None):
-	return render_template("index.html", files_exists=sum([len(dirs) for r, dirs, files in os.walk(files_location)]), files_location=files_location, folder_name=folder_name, editing='/edit/' in request.base_url, adding='/add' in request.base_url)
+	return render_template("index.html",
+						files_exists=sum([len(dirs) for r, dirs, files in os.walk(files_location)]),
+						files_location=files_location,
+						folder_name=folder_name,
+						editing='/edit/' in request.base_url,
+						adding='/add' in request.base_url,
+						searching='/search' in request.base_url)
 
 @app.route('/listitems')
 def list():
@@ -47,7 +54,7 @@ def listsearch():
 				incriment = incriment + 1
 	return render_template("list.html", folders=folders)
 
-@app.route('/search')
+@app.route('/searchitems')
 def search():
 	return render_template("search.html")
 

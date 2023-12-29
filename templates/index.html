@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,39 +10,27 @@
     <script src="../static/htmx.min.js"></script>
     <script src="../static/utils.js"></script>
 </head>
+
 <body>
     <header>
-        <div
-            hx-get="/"
-            hx-push-url="true"
-            hx-target="body"
-            class="logo">
+        <div hx-get="/" hx-push-url="true" hx-target="body" class="logo">
             STL Manager
         </div>
         <aside>
-            <div
-                hx-get="/listitems"
-                hx-target="#main">
-                <div
-                    hx-get="/search"
-                    hx-target="#search">
-                    <button
-                        class="start_search"    
-                        hx-get="/"
-                        hx-push-url="true">
-                        Search
-                    </button>
-                </div>
+            <div>
+                <button hx-get="/search" hx-push-url="true" hx-target="body" class="start_search">
+                    Search
+                </button>
             </div>
-            <div
-                hx-get="/additem" 
-                hx-target="#main">
-                    <button class="add" hx-get="/add" hx-push-url="true" title="Add Media"></button>
+            <div hx-get="/additem" hx-target="#main">
+                <button class="add" hx-get="/add" hx-push-url="true" title="Add Media"></button>
             </div>
         </aside>
     </header>
-    <section id="search">
+    {% if searching %}
+    <section id="search" hx-get="/searchitems" hx-trigger="load">
     </section>
+    {% endif %}
     {% if folder_name!= None %}
         {% if editing %}
             <main hx-get="/edititem/{{folder_name}}" id="main" hx-trigger="load">
@@ -53,7 +42,8 @@
     {% else %}
         <main hx-get="/listitems" id="main" hx-trigger="load">
     {% endif %}
-        <img class="loading" src="../static/images/loading.svg">
-    </main>
+            <img class="loading" src="../static/images/loading.svg">
+        </main>
 </body>
+
 </html>
